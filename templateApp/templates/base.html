@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>{% block title %} {% endblock %} | Prihody</title>
+</head>
+<body>
+
+<ul>
+
+<!-- Вход/Выход пользователя -->
+{% if user.is_authenticated %}
+<!-- Если пользователь залогинился -->
+<li>
+	User: {{ user.get_username }} |
+	<a href="{% url 'logout'%}?next={{request.path}}">Logout</a>
+</li>
+<!-- /Если пользователь залогинился -->
+{% else %}
+<!-- Если пользователь разлогинился -->
+<li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
+<!-- Если пользователь разлогинился -->
+{% endif %}
+<!-- /Вход/Выход пользователя -->
+
+</ul>
+
+{% block content %}
+{% endblock %}
+
+
+{% block zzz %}
+{% endblock %}
+</body>
+</html>

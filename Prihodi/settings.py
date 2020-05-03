@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'party'
+    'party',
+    'templateApp',
 ]
 
 MIDDLEWARE = [
@@ -59,6 +60,7 @@ ROOT_URLCONF = 'Prihodi.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        # 'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -128,20 +130,25 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-
-
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
-# Send mail
+
+# SEND EMAIL
 EMAIL_BAKEND = 'django.core.mail.backends.smtp.EmailBackend'
 DEFAULT_FROM_EMAIL = "atar.7@mail.ru"
-
 EMAIL_HOST = 'smtp.mail.ru'
 EMAIL_PORT = 2525
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER_Prihodi')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD_Prihodi')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
+
+
+# REDIRECT
+LOGIN_REDIRECT_URL = '/'
+# LOGIN_REDIRECT_URL = 'dashboard'
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
