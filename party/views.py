@@ -1,4 +1,6 @@
 from django.shortcuts import render
 
+
 def main(request):
-	pass
+	return render(request, 'party/main_page.html')
+

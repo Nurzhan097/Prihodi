@@ -14,6 +14,8 @@ def profile_page(request):
 
 
 def register(request):
+	context = {}
+	user_form = forms.UserRegistrationForm()
 	if request.method == 'POST':
 		user_form = forms.UserRegistrationForm(request.POST)
 		if user_form.is_valid():
@@ -25,7 +27,10 @@ def register(request):
 			new_user.save()
 			# Создания профиля пользователя
 			models.Profile.objects.create(user=new_user)
-			return render(request, 'account/register_done.html', {'new_user': new_user})
-	else:
-		user_form = forms.UserRegistrationForm()
-	return render(request, 'account/register.html', {'user_form': user_form})
+
+			context['new_user'] = new_user
+			context['next'] = 'profile'
+			return render(request, 'account/registration/registration_done.html', context)
+
+	context['user_form'] = user_form
+	return render(request, 'account/registration/registration_form.html', {'user_form': user_form})

@@ -9,11 +9,18 @@ class UserRegistrationForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'email')
+        fields = ('username', 'email')
 
     def clean_password2(self):
         cd = self.cleaned_data
         if cd['password'] != cd['password2']:
             raise forms.ValidationError('Passwords don\'t match')
         return cd['password2']
+
+    def clean_email(self):
+        cd = self.cleaned_data
+        user_with_email = User.objects.filter(email=cd['email'])
+        if user_with_email:
+            raise forms.ValidationError('A user with this email already exists.')
+        return cd['email']
 
